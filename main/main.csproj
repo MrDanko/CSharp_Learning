@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D587BAEF-5BCB-4DB8-A243-0922B32F55F5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>main</RootNamespace>
+    <AssemblyName>main</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassWorks\CW1\CW1.csproj">
+      <Project>{29cb19d7-7f66-4d7b-98bf-828400757fab}</Project>
+      <Name>CW1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Homework1\Homework1.csproj">
+      <Project>{3a8fede7-3ab2-4b62-beb7-035afa7da2ac}</Project>
+      <Name>Homework1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Homework2\Homework2.csproj">
+      <Project>{659e139f-7ede-4564-ab02-4e7399750f58}</Project>
+      <Name>Homework2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Homework3\Homework3.csproj">
+      <Project>{7564be8a-4a57-4041-9678-37ff468f799f}</Project>
+      <Name>Homework3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Homework4\Homework4.csproj">
+      <Project>{05183e7b-ef38-4d7d-87be-7c0dbc3d794a}</Project>
+      <Name>Homework4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Homework6\Homework6.csproj">
+      <Project>{33203710-c5f1-4dff-8b61-a959c59cfa07}</Project>
+      <Name>Homework6</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\task1\task1.csproj">
+      <Project>{19a7c2a6-1a7d-4025-8152-a0710407fcc5}</Project>
+      <Name>task1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\task2-1\task2-1.csproj">
+      <Project>{aaa559af-3c2f-4452-8c28-a15063e53ecd}</Project>
+      <Name>task2-1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\task2-2\task2-2.csproj">
+      <Project>{17879321-d236-46de-88a9-8eec626c3260}</Project>
+      <Name>task2-2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\task4\task4.csproj">
+      <Project>{c9e85d74-99b3-4ef6-9fa6-7b5b7e12abe8}</Project>
+      <Name>task4</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -29,7 +29,6 @@ namespace HomeTask
         }
         public static ComplexNumber operator +(ComplexNumber c1, ComplexNumber c2)
         {
-
             return new ComplexNumber(c1.real+c1.real, c1.imaginary+c2.imaginary);
         }
         public static ComplexNumber operator -(ComplexNumber c1, ComplexNumber c2)
@@ -54,7 +53,6 @@ namespace HomeTask
             string strA, strB;
             strA = str.Substring(0,str.IndexOf('+'));
             strB = str.Substring(str.IndexOf('+')+1, str.Length- str.IndexOf('+')-2);
-
             return int.TryParse(strA, out a) && int.TryParse(strB, out b) ? new ComplexNumber(a,b) :  new ComplexNumber(0, 0);
         }
         public static implicit operator String (ComplexNumber c1)
@@ -81,7 +79,7 @@ namespace HomeTask
         {
             if (imaginary < 0)
                 return String.Format($"{real}{imaginary}i");
-            else return "0";
+            else if (real==0&&imaginary==0) return "0";
             return String.Format($"{real}+{imaginary}i");
         }
         public override int GetHashCode()

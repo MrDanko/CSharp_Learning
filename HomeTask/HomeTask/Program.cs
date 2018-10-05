@@ -59,27 +59,60 @@ namespace HomeTask
         }
         public static implicit operator String (ComplexNumber c1)
         {
+            if (c1.imaginary < 0)
+                return String.Format($"{c1.real}{c1.imaginary}i");
+            else if (c1.real == 0)
+                return c1.imaginary.ToString() + "i";
+            else if (c1.imaginary == 0)
+                return c1.real.ToString();
             return  c1.ToString();
         }
         public override bool Equals(object obj)
         {
-            ComplexNumber c1 = obj as ComplexNumber;
-            if(real == c1.real && imaginary == c1.imaginary)
-                return true;
+            if (obj is ComplexNumber&& obj!=null)
+            {
+                ComplexNumber c1 = obj as ComplexNumber;
+                if (real == c1.real && imaginary == c1.imaginary)
+                    return true;
+            }
             return false;
         }
         public override string ToString()
         {
             if (imaginary < 0)
                 return String.Format($"{real}{imaginary}i");
+            else return "0";
             return String.Format($"{real}+{imaginary}i");
+        }
+        public override int GetHashCode()
+        {
+            return real.GetHashCode() + imaginary.GetHashCode();
         }
         class ComplexSet : IEnumerable
         {
+            ArrayList cSet = new ArrayList();
 
+            public ComplexNumber this[int index]
+            {
+                get { return (ComplexNumber)cSet[index]; }
+                set { cSet.Insert(index, value); }
+            }
+            public ComplexNumber this[string str]
+            {
+                get
+                {
+                    foreach (ComplexNumber c in cSet)
+                    {
+                        if (c.ToString() == str)
+                            return c;
+                       
+                    }
+                    return new ComplexNumber(0,0);
+                }
+            }
             public IEnumerator GetEnumerator()
             {
-                throw new NotImplementedException();
+                return cSet.GetEnumerator();
             }
         }
     }
@@ -90,8 +123,8 @@ namespace HomeTask
         {
             string text = "23+5i";
             ComplexNumber complexNumber = (ComplexNumber)text;
-            ComplexNumber c2=new ComplexNumber(23,5);
-            Console.WriteLine(complexNumber.Equals(c2));
+            ComplexNumber c2=new ComplexNumber(23,-5);
+            Console.WriteLine(c2);
             Console.ReadKey();
         }
     }

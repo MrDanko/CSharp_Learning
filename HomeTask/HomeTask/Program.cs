@@ -47,22 +47,47 @@ namespace HomeTask
                 return true;
             return false;
         }
-        public static explicit operator ComplexNumber( string str)
+        public static explicit operator ComplexNumber(string str)
         {
-            int a, b;
-            string strA, strB;
-            strA = str.Substring(0,str.IndexOf('+'));
-            strB = str.Substring(str.IndexOf('+')+1, str.Length- str.IndexOf('+')-2);
-            return int.TryParse(strA, out a) && int.TryParse(strB, out b) ? new ComplexNumber(a,b) :  new ComplexNumber(0, 0);
+            string strA=null, strB=null;
+            try
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(str, "^-\\d+-\\d+i$"))
+                {
+                    str = str.Remove(0, 1);
+                    strA = "-" + str.Substring(0, str.IndexOf('-'));
+                    strB = str.Substring(str.IndexOf('-'), str.Length - str.IndexOf('-') - 1);
+                }
+                else if (System.Text.RegularExpressions.Regex.IsMatch(str, "^-\\d+\\+\\d+i$") || System.Text.RegularExpressions.Regex.IsMatch(str, "^\\d+\\+\\d+i$"))
+                {
+                    strA = str.Substring(0, str.IndexOf('+'));
+                    strB = str.Substring(str.IndexOf('+') + 1, str.Length - str.IndexOf('+') - 2);
+                }
+                else if (System.Text.RegularExpressions.Regex.IsMatch(str, "^\\d+\\-\\d+i$"))
+                {
+                    strA = str.Substring(0, str.IndexOf('-'));
+                    strB = str.Substring(str.IndexOf('-'), str.Length - str.IndexOf('-') - 1);
+                }
+                else if (System.Text.RegularExpressions.Regex.IsMatch(str, "^-\\d+i$") || System.Text.RegularExpressions.Regex.IsMatch(str, "^\\d+i$"))
+                {
+                    strA = "0";
+                    strB = str.Substring(0, str.Length - 1);
+                }
+                else if (System.Text.RegularExpressions.Regex.IsMatch(str, "^\\d$"))
+                {
+                    strA = str;
+                    strB = "0";
+                }
+                else throw new Exception("Wrong string format. Please enter correct number (x+y*i)");
+            }
+            catch  (Exception e)
+            {
+                throw e; 
+            }
+            return int.TryParse(strA, out int a) && int.TryParse(strB, out int b) ? new ComplexNumber(a, b) : new ComplexNumber(a, 0);
         }
         public static implicit operator String (ComplexNumber c1)
         {
-            if (c1.imaginary < 0)
-                return String.Format($"{c1.real}{c1.imaginary}i");
-            else if (c1.real == 0)
-                return c1.imaginary.ToString() + "i";
-            else if (c1.imaginary == 0)
-                return c1.real.ToString();
             return  c1.ToString();
         }
         public override bool Equals(object obj)
@@ -79,8 +104,12 @@ namespace HomeTask
         {
             if (imaginary < 0)
                 return String.Format($"{real}{imaginary}i");
-            else if (real==0&&imaginary==0) return "0";
-            return String.Format($"{real}+{imaginary}i");
+            else if (real==0&&imaginary==0)
+                return "0";
+            else if(real==0)
+                return String.Format($"{real}");
+            else
+                return String.Format($"{real}+{imaginary}i");
         }
         public override int GetHashCode()
         {
@@ -119,10 +148,17 @@ namespace HomeTask
     {
         static void Main(string[] args)
         {
-            string text = "23+5i";
-            ComplexNumber complexNumber = (ComplexNumber)text;
-            ComplexNumber c2=new ComplexNumber(23,-5);
-            Console.WriteLine(c2);
+            try
+            {
+                string text = "upg";
+                ComplexNumber complexNumber = (ComplexNumber)text;
+                //ComplexNumber c2=new ComplexNumber(23,-5);
+                Console.WriteLine(complexNumber);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             Console.ReadKey();
         }
     }
